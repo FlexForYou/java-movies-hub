@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class MoviesHandler extends BaseHttpHandler {
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     private final MoviesStore moviesStore;
 
     public MoviesHandler(MoviesStore moviesStore) {
@@ -56,11 +56,11 @@ public class MoviesHandler extends BaseHttpHandler {
             } catch (IllegalArgumentException e) {
                 List<String> details = List.of(e.getMessage());
                 ErrorResponse errorResponse = new ErrorResponse("Ошибка поиска фильма", details);
-                sendErrorResponse(ex, 400, e.getMessage());
+                sendErrorResponse(ex, 404, e.getMessage());
             } catch (MovieNotFoundException e) {
                 List<String> details = List.of(e.getMessage());
                 ErrorResponse errorResponse = new ErrorResponse("Ошибка id", details);
-                sendErrorResponse(ex, 404, e.getMessage());
+                sendErrorResponse(ex, 400, e.getMessage());
             }
 
         } else if (path.equals("/movies")) {
@@ -88,10 +88,10 @@ public class MoviesHandler extends BaseHttpHandler {
                 String jsonResponse = gson.toJson(movies);
                 sendJson(ex, 200, jsonResponse);
             } else {
-                sendErrorResponse(ex, 400, "Некорректный параметр запроса");
+                sendErrorResponse(ex, 404, "Некорректный параметр запроса");
             }
         } else {
-            ex.sendResponseHeaders(404, -1);
+            ex.sendResponseHeaders(400, -1);
             ex.close();
         }
     }
