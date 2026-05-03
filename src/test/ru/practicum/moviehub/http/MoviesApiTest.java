@@ -28,7 +28,7 @@ public class MoviesApiTest {
     private static MoviesServer server;
     private static HttpClient client;
     private static final String BASE = "http://localhost:8080";
-    private MoviesStore moviesStore;
+    private MoviesStore moviesStore = new MoviesStore();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @BeforeEach
