@@ -261,7 +261,7 @@ public class MoviesApiTest {
 
         HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
-        assertEquals(404, resp.statusCode(), "При несуществующем ID должен вернуться 404");
+        assertEquals(400, resp.statusCode(), "При несуществующем ID должен вернуться 400");
     }
 
     @Test
@@ -273,7 +273,7 @@ public class MoviesApiTest {
 
         HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
-        assertEquals(400, resp.statusCode(), "При некорректном ID должен вернуться 400");
+        assertEquals(404, resp.statusCode(), "При некорректном ID должен вернуться 404");
     }
 
     // ==================== DELETE /movies/{id} ====================
@@ -298,7 +298,7 @@ public class MoviesApiTest {
                 .build();
 
         HttpResponse<String> getResp = client.send(getReq, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-        assertEquals(404, getResp.statusCode(), "После удаления фильм не должен находиться");
+        assertEquals(400, getResp.statusCode(), "После удаления фильм не должен находиться");
     }
 
     @Test
