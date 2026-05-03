@@ -1,7 +1,5 @@
 package ru.practicum.moviehub.http;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import ru.practicum.moviehub.Exception.MovieNotFoundException;
 import ru.practicum.moviehub.api.ErrorResponse;
